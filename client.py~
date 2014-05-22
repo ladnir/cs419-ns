@@ -95,6 +95,6 @@ def main():
     	    breach(s1,s2,badguy, command)
         if command == 'quit':
             quit(s1,s2)
-            break
+		    break
     s1.close()
 main()

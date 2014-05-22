@@ -117,10 +117,6 @@ class Server:
         self.rotate(r)
         self.rotateConn.sendall(str(r))
        
-    def shutdown(self):
-        self.clientConn.close()
-        self.internalConn.close()
-        self.rotateConn.close()
     
 def main():
     
@@ -146,8 +142,9 @@ def main():
     	    s.breach()
         if data[0] == 'quit':
     	    break
-    	    
-    s.shutdown()
+    s.clientConn.close()
+    s.internalConn.close()
+    s.rotateConn.close()
     
 main()
 

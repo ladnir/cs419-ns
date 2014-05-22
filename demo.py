@@ -52,7 +52,7 @@ def login(server1, server2, client):
 def rotate( server1, server2):
 	print "============= Rotation ==============="
 
-	r = 3384485068
+	r = randint(0,9999999999)
 	print " rotating shares with random "+str(r),;stdin.readline()
 
 
