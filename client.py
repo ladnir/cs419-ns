@@ -52,9 +52,17 @@ def login(server1, server2):
         print "The password in not correct"
     return
 
-def breach(s1,s2,badguy,bt):
-    print "which server? ",
+def breach(s1,s2,badguy):
+    bt  = ""
+    
+    print "which server? [1, 2] ",
     server = stdin.readline()[0:-1]
+    print "server detection? [yes, no]",
+    detection = stdin.readline()[0:-1]
+    if detection == '1' or detection == 'yes':
+        bt = "breach_notify"
+    else:
+        bt = "breach"
     
     if server == "1":
         s1.sendall(bt)
@@ -87,14 +95,14 @@ def main():
         command = stdin.readline()[0:-1]
         if command == 'setup':
 	        setup(s1,s2)
-        if command == 'login':
+        elif command == 'login':
 		    login(s1,s2)
-        if command == 'rotate':
-	    	rotate(s1,s2)
-    	if command == 'breach' or command == "breach_notify":
-    	    breach(s1,s2,badguy, command)
-        if command == 'quit':
+    	elif command == 'breach':
+    	    breach(s1,s2,badguy)
+        elif command == 'quit':
             quit(s1,s2)
             break
+        else:
+            print "invalid input, try:\n    > setup\n    > login\n    > breach\n    > quit"
     s1.close()
 main()

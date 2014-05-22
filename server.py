@@ -82,6 +82,7 @@ class Server:
 
     def login(self,clientMessage):
         print "=============== login ==============="
+        
         calc1 = self.share ^ int(clientMessage)
         print 'calculated ' + str(calc1)
         
@@ -133,19 +134,24 @@ def main():
             s.rotate(int(rotateData))
             continue
             
-        clientData = tryRead(s.clientConn)            
+        clientData = tryRead(s.clientConn)       
+        if clientData == "":
+            continue     
         data = clientData.split(":",1)
         
         if data[0] == 'setup':
     	    s.setup(data[1])
-        if data[0] == 'login':
+        elif data[0] == 'login':
             s.login(data[1])
-        if data[0] == 'breach_notify':
+        elif data[0] == 'breach_notify':
     	    s.breach_notify()
-        if data[0] == 'breach':
+        elif data[0] == 'breach':
     	    s.breach()
-        if data[0] == 'quit':
+        elif data[0] == 'quit':
     	    break
+    	else:
+    	    print "invalid command:\n    ",
+    	    print data[0]
     	    
     s.shutdown()
     
